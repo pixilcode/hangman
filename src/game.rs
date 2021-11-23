@@ -20,7 +20,12 @@ impl HangmanGame {
 	/// Play the game, returning the result of playing the
 	/// game (either a success or a failure)
 	pub fn play(self) -> GameResult {
+		// Req 1
+		// Welcome the user
+		println!("{}", messages::WELCOME);
+		println!();
 
+		todo!("Build the game loop")
 	}
 }
 
