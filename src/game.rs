@@ -1,4 +1,5 @@
 use std::collections::HashSet;
+use std::io::{self, Write};
 
 mod messages;
 
@@ -31,6 +32,7 @@ impl HangmanGame {
 	/// A recursive function representing the game loop
 	fn game_loop(self) -> GameResult {
 		if false /* todo!("Determine if all the letters have been guessed") */ {
+			// Req 6
 			// End condition: all the letters have been guessed
 			todo!("Return a success result with the number of guesses")
 		} else if "a" == "b" /* todo!("Determine if the player has guessed incorrectly too many times") */ {
@@ -41,7 +43,25 @@ impl HangmanGame {
 			// Display the word with correctly guessed chars filled in
 			println!("{} ({} letters)", self.show_word(), self.target_word.len());
 
-			todo!("Finish game loop")
+			// Req 4
+			// Ask the user to guess a letter
+			print!("{}", messages::GUESS_LETTER_PROMPT);
+			io::stdout().flush().expect("stdout not available"); // Flush stdout
+
+			// Read in the user's character
+			let mut user_input = String::new();
+			io::stdin().read_line(&mut user_input).expect("stdin not available");
+
+			// Convert the input from String to char
+			let user_char = user_input.trim().parse::<char>();
+			match user_char {
+				Ok(c) => todo!("Deal with user character"),
+				Err(_) => {
+					println!("{}", messages::INVALID_INPUT);
+					println!();
+					self.game_loop()
+				}
+			}
 		}
 		
 	}
