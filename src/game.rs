@@ -46,7 +46,7 @@ impl HangmanGame {
 			// Req 3
 			// Req 4a
 			// Display the word with correctly guessed chars filled in
-			println!("{} ({} letters)", self.show_word(), self.target_word.len());
+			println!("{} ({} letters)\n", self.show_word(), self.target_word.len());
 
 			// Req 4
 			// Ask the user to guess a letter
@@ -56,6 +56,7 @@ impl HangmanGame {
 			// Read in the user's character
 			let mut user_input = String::new();
 			io::stdin().read_line(&mut user_input).expect("stdin not available");
+			println!();
 
 			// Convert the input from String to char or report error
 			let user_char = user_input.trim().parse::<char>();
@@ -64,10 +65,10 @@ impl HangmanGame {
 					// Req 4b
 					// Let the user know if they guessed correctly
 					if self.target_word.contains(c) {
-						println!("{}", messages::correct_guess(c));
+						println!("{}\n", messages::correct_guess(c));
 						self.correct_guesses.insert(c);
 					} else {
-						println!("{}", messages::incorrect_guess(c));
+						println!("{}\n", messages::incorrect_guess(c));
 						self.incorrect_guesses.insert(c);
 					}
 
@@ -75,7 +76,7 @@ impl HangmanGame {
 					// Req 5
 					// Display the total number of guesses as well
 					// as the number of correct and incorrect guesses
-					println!("{}",
+					println!("{}\n",
 						messages::display_guesses(
 							&self.correct_guesses,
 							&self.incorrect_guesses
@@ -85,7 +86,7 @@ impl HangmanGame {
 					self.game_loop()
 				},
 				Err(_) => {
-					println!("{}", messages::INVALID_INPUT);
+					println!("{}\n", messages::INVALID_INPUT);
 					println!();
 					self.game_loop()
 				}
