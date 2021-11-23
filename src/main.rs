@@ -5,7 +5,7 @@ mod game;
 mod messages;
 
 // Req 9
-// This interacts with the user via the terminal
+// This program interacts with the user via the terminal
 
 fn main() {
     let dictionary = construct_dictionary();

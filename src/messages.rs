@@ -6,7 +6,7 @@ Ready to begin?";
 
 pub const GUESS_LETTER_PROMPT: &str = "Please enter your guess: ";
 
-pub const PLAY_AGAIN_PROMPT: &str = "Would you like to play again? (y/n)";
+pub const PLAY_AGAIN_PROMPT: &str = "Would you like to play again? (y/n) ";
 
 pub const END_GAME: &str = "Thanks for playing!";
 
