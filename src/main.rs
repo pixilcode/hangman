@@ -1,26 +1,39 @@
 use std::collections::HashSet;
+use std::io::{self, Write};
 
 mod game;
 mod messages;
 
+// Req 9
+// This interacts with the user via the terminal
+
 fn main() {
-    // Req 2
-    // Pick a word
     let dictionary = construct_dictionary();
+    
+    loop {
+        // Set up the game and play
+        
+        // Req 2
+        // Req 8a
+        // Pick a word
+        let target_word = choose_word(&dictionary);
+        let game = game::HangmanGame::new(&target_word);
+        let result = game.play();
 
-    // Set up the game and play
-    let target_word = choose_word(dictionary);
-    let game = game::HangmanGame::new(&target_word);
-    let result = game.play();
+        match result {
+            game::GameResult::Success(guesses) => {
+                // Req 7
+                println!("{}", messages::game_success(&target_word, guesses));
+            },
+            game::GameResult::Failure {
+                    ..
+                } => todo!("Let the user know they lost the game")
+        }
 
-    match result {
-        game::GameResult::Success(guesses) => {
-            // Req 7
-            println!("{}", messages::game_success(&target_word, guesses));
-        },
-        game::GameResult::Failure {
-                ..
-            } => todo!("Let the user know they lost the game")
+        // Req 8b
+        if !play_again() {
+            break;
+        }
     }
 }
 
@@ -41,7 +54,7 @@ fn construct_dictionary() -> HashSet<String> {
     dictionary
 }
 
-fn choose_word(dictionary: HashSet<String>) -> String {
+fn choose_word(dictionary: &HashSet<String>) -> String {
     // The randomly chosen index of the word
 	let idx = rand::random::<usize>() % dictionary.len();
 
@@ -51,4 +64,28 @@ fn choose_word(dictionary: HashSet<String>) -> String {
     // `idx` will always be less than the length of the
     // dictionary
 	dictionary.iter().nth(idx).unwrap().to_string()
+}
+
+fn play_again() -> bool {
+    // Req 8
+    // Ask if they would like to play again
+    print!("{}", messages::PLAY_AGAIN_PROMPT);io::stdout().flush().expect("stdout not available"); // Flush stdout
+
+    // Read in the user's character
+    let mut user_input = String::new();
+    io::stdin().read_line(&mut user_input).expect("stdin not available");
+    println!();
+
+    // Convert the character from String to boolean or report error
+    // Also, converts the character to lowercase so that 'Y', 'y', 'N',
+    // and 'n' are all accepted
+    let user_char = user_input.trim().parse::<char>();
+    match user_char.map(|c| c.to_ascii_lowercase()) {
+        Ok('y') => true,
+        Ok('n') => false,
+        _ => {
+            println!("{}\n", messages::INVALID_INPUT);
+            play_again()
+        }
+    }
 }
