@@ -3,6 +3,8 @@ use std::collections::HashSet;
 mod game;
 
 fn main() {
+    // Req 2
+    // Pick a word
     let dictionary = construct_dictionary();
 
     // Set up the game and play

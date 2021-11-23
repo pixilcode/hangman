@@ -25,7 +25,23 @@ impl HangmanGame {
 		println!("{}", messages::WELCOME);
 		println!();
 
-		todo!("Build the game loop")
+		self.game_loop()
+	}
+
+	/// A recursive function representing the game loop
+	fn game_loop(self) -> GameResult {
+		if todo!("Determine if all the letters have been guessed") {
+			// End condition: all the letters have been guessed
+			todo!("Return a success result with the number of guesses")
+		} else if todo!("Determine if the player has guessed incorrectly too many times") {
+			// End condition: the player has incorrectly guessed too many times
+			todo!("Return a failure result with the number of incorrect guesses")
+		} else {
+			// Req 3
+			// Display the word with correctly guessed words filled in
+			todo!("Make the main part of the game loop")
+		}
+		
 	}
 }
 
