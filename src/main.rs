@@ -31,10 +31,17 @@ fn main() {
         }
 
         // Req 8b
+        // Ask the user if they want to play again
+        // If they don't, quit the game
         if !play_again() {
             break;
         }
     }
+
+    // Req 8b
+    // Thank the user for playing and quit the game
+    println!("{}", messages::END_GAME);
+
 }
 
 fn construct_dictionary() -> HashSet<String> {

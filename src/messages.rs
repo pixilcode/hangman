@@ -8,6 +8,8 @@ pub const GUESS_LETTER_PROMPT: &str = "Please enter your guess: ";
 
 pub const PLAY_AGAIN_PROMPT: &str = "Would you like to play again? (y/n)";
 
+pub const END_GAME: &str = "Thanks for playing!";
+
 pub const INVALID_INPUT: &str = "Your input was not valid. Please input a single character";
 
 pub fn correct_guess(guess: char) -> String {
