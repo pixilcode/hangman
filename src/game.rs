@@ -1,7 +1,6 @@
 use std::collections::HashSet;
 use std::io::{self, Write};
-
-mod messages;
+use crate::messages;
 
 /// A struct representation of the "Hangman" game
 pub struct HangmanGame {

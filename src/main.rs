@@ -1,6 +1,7 @@
 use std::collections::HashSet;
 
 mod game;
+mod messages;
 
 fn main() {
     // Req 2
