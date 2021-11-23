@@ -86,7 +86,7 @@ impl HangmanGame {
 					self.game_loop()
 				},
 				Err(_) => {
-					println!("{}\n", messages::INVALID_INPUT);
+					println!("{}\n", messages::invalid_input(&user_input, "'y' or 'n'"));
 					println!();
 					self.game_loop()
 				}

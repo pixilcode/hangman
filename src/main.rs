@@ -91,7 +91,7 @@ fn play_again() -> bool {
         Ok('y') => true,
         Ok('n') => false,
         _ => {
-            println!("{}\n", messages::INVALID_INPUT);
+            println!("{}\n", messages::invalid_input(&user_input, "a single letter"));
             play_again()
         }
     }

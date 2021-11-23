@@ -10,7 +10,9 @@ pub const PLAY_AGAIN_PROMPT: &str = "Would you like to play again? (y/n) ";
 
 pub const END_GAME: &str = "Thanks for playing!";
 
-pub const INVALID_INPUT: &str = "Your input was not valid. Please input a single character";
+pub fn invalid_input(invalid: &str, expected: &str) -> String {
+	format!("'{}' is not valid input. Please input {}.", invalid, expected)
+}
 
 pub fn correct_guess(guess: char) -> String {
 	format!("'{}' *is* in the word!", guess)
