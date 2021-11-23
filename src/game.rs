@@ -11,15 +11,17 @@ pub struct HangmanGame {
 	target_word: String,
 	correct_guesses: HashSet<char>,
 	incorrect_guesses: HashSet<char>,
+	failure_possible: bool,
 }
 
 impl HangmanGame {
 	/// Creates a new game based on a given word
-	pub fn new(target_word: &str) -> Self {
+	pub fn new(target_word: &str, failure_possible: bool) -> Self {
 		Self {
 			target_word: target_word.to_string(),
 			correct_guesses: HashSet::new(),
 			incorrect_guesses: HashSet::new(),
+			failure_possible
 		}
 	}
 
@@ -43,15 +45,19 @@ impl HangmanGame {
 			// End if all the letters were correctly guessed
 			// End condition: all the letters have been guessed
 			GameResult::Success(self.correct_guesses.len() + self.incorrect_guesses.len())
-		} else if "a" == "b" && self.incorrect_guesses.len() >= HANGMAN_BODY_SIZE {
-			// End condition: the player has incorrectly guessed too many times
-			// Currently doesn't happen because there is no option for failure
-			GameResult::Failure {
-				unguessed_chars: self.target_word.chars().filter(
-					// Filter out the letters that were guessed by the player
-					|c| !self.correct_guesses.contains(c)
-				).collect()
-			}
+		} else if
+			self.failure_possible &&
+			self.incorrect_guesses.len() >= HANGMAN_BODY_SIZE {
+
+				// End condition: the player has incorrectly guessed too many times
+				// Currently doesn't happen because there is no option for failure
+				GameResult::Failure {
+					unguessed_chars: self.target_word.chars().filter(
+						// Filter out the letters that were guessed by the player
+						|c| !self.correct_guesses.contains(c)
+					).collect()
+				}
+
 		} else {
 			// Req 3
 			// Req 4a
@@ -74,7 +80,10 @@ impl HangmanGame {
 				Ok(c) => {
 					// Req 4b
 					// Let the user know if they guessed correctly
-					if self.target_word.contains(c) {
+					// (or if they've already guessed the character)
+					if self.correct_guesses.contains(&c) || self.incorrect_guesses.contains(&c) {
+						println!("{}\n", messages::already_guessed(c));
+					} else if self.target_word.contains(c) {
 						println!("{}\n", messages::correct_guess(c));
 						self.correct_guesses.insert(c);
 					} else {
@@ -96,7 +105,7 @@ impl HangmanGame {
 					self.game_loop()
 				},
 				Err(_) => {
-					println!("{}\n", messages::invalid_input(&user_input, "'y' or 'n'"));
+					println!("{}\n", messages::invalid_input(&user_input, "a single letter"));
 					println!();
 					self.game_loop()
 				}

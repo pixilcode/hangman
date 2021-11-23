@@ -9,6 +9,20 @@ mod messages;
 
 fn main() {
     let dictionary = construct_dictionary();
+
+    // Check for the "-f" flag
+    let args: Vec<String> = std::env::args().collect();
+    if args.len() > 2 { // first arg is current directory, second is possible '-f' flag
+        panic!("Multiple options are not accepted (try '-f')");
+    }
+
+    let f_flag = args.get(1);
+
+    let failure_possible = match f_flag {
+        Some(option) if option == "-f" => true,
+        Some(option) => panic!("Invalid option '{}'", option),
+        None => false,
+    };
     
     loop {
         // Set up the game and play
@@ -17,7 +31,7 @@ fn main() {
         // Req 8a
         // Pick a word
         let target_word = choose_word(&dictionary);
-        let game = game::HangmanGame::new(&target_word);
+        let game = game::HangmanGame::new(&target_word, failure_possible);
         let result = game.play();
 
         match result {
@@ -91,7 +105,7 @@ fn play_again() -> bool {
         Ok('y') => true,
         Ok('n') => false,
         _ => {
-            println!("{}\n", messages::invalid_input(&user_input, "a single letter"));
+            println!("{}\n", messages::invalid_input(&user_input, "'y' or 'n'"));
             play_again()
         }
     }
