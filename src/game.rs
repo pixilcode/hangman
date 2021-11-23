@@ -1,5 +1,7 @@
 use std::collections::HashSet;
 
+mod messages;
+
 /// A struct representation of the "Hangman" game
 pub struct HangmanGame {
 	target_word: String,
@@ -13,6 +15,12 @@ impl HangmanGame {
 			target_word,
 			user_guesses: HashSet::new(),
 		}
+	}
+
+	/// Play the game, returning the result of playing the
+	/// game (either a success or a failure)
+	pub fn play(self) -> GameResult {
+
 	}
 }
 

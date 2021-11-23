@@ -4,9 +4,12 @@ mod game;
 
 fn main() {
     let dictionary = construct_dictionary();
-    let targetWord = choose_word(dictionary);
 
-    let game = game::HangmanGame::new(targetWord);
+    // Set up the game and play
+    let target_word = choose_word(dictionary);
+    let game = game::HangmanGame::new(target_word);
+    let result = game.play();
+    
 }
 
 fn construct_dictionary() -> HashSet<String> {
