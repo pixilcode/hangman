@@ -4,6 +4,10 @@ use std::io::{self, Write};
 mod game;
 mod messages;
 
+// *************
+// FINAL PRODUCT
+// *************
+
 // Req 9
 // This program interacts with the user via the terminal
 
