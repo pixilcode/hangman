@@ -6,6 +6,16 @@ pub struct HangmanGame {
 	user_guesses: HashSet<char>,
 }
 
+impl HangmanGame {
+	/// Creates a new game based on a given word
+	pub fn new(target_word: String) -> Self {
+		Self {
+			target_word,
+			user_guesses: HashSet::new(),
+		}
+	}
+}
+
 /// An enum that represents the result of playing a game
 pub enum GameResult {
 	Success(u32),

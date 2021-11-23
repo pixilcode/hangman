@@ -4,8 +4,9 @@ mod game;
 
 fn main() {
     let dictionary = construct_dictionary();
+    let targetWord = choose_word(dictionary);
 
-    let game = game::HangmanGame::new(dictionary);
+    let game = game::HangmanGame::new(targetWord);
 }
 
 fn construct_dictionary() -> HashSet<String> {
@@ -23,4 +24,16 @@ fn construct_dictionary() -> HashSet<String> {
     dictionary.insert("control".to_string());
 
     dictionary
+}
+
+fn choose_word(dictionary: HashSet<String>) -> String {
+    // The randomly chosen index of the word
+	let idx = rand::random::<usize>() % dictionary.len();
+
+    // Get the `n`th word from the dictionary
+    // 
+    // This can safely be unwrapped because the index
+    // `idx` will always be less than the length of the
+    // dictionary
+	dictionary.iter().nth(idx).unwrap().to_string()
 }
