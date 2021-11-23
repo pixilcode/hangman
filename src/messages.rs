@@ -11,7 +11,7 @@ pub const PLAY_AGAIN_PROMPT: &str = "Would you like to play again? (y/n) ";
 pub const END_GAME: &str = "Thanks for playing!";
 
 pub fn invalid_input(invalid: &str, expected: &str) -> String {
-	format!("'{}' is not valid input. Please input {}.", invalid, expected)
+	format!("'{}' is not valid input. Please input {}.", invalid.trim(), expected)
 }
 
 pub fn already_guessed(guess: char) -> String {
