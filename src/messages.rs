@@ -14,6 +14,10 @@ pub fn invalid_input(invalid: &str, expected: &str) -> String {
 	format!("'{}' is not valid input. Please input {}.", invalid, expected)
 }
 
+pub fn already_guessed(guess: char) -> String {
+	format!("'{}' has already been guessed.", guess)
+}
+
 pub fn correct_guess(guess: char) -> String {
 	format!("'{}' *is* in the word!", guess)
 }
