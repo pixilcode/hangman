@@ -11,9 +11,9 @@ pub struct HangmanGame {
 
 impl HangmanGame {
 	/// Creates a new game based on a given word
-	pub fn new(target_word: String) -> Self {
+	pub fn new(target_word: &str) -> Self {
 		Self {
-			target_word,
+			target_word: target_word.to_string(),
 			correct_guesses: HashSet::new(),
 			incorrect_guesses: HashSet::new(),
 		}

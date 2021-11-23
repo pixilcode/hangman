@@ -44,6 +44,15 @@ fn hash_set_to_string(set: &HashSet<char>) -> String {
 	).collect()
 }
 
+pub fn game_success(word: &str, guesses: usize) -> String {
+	format!("\
+Congratulations! You correctly guessed the word '{}'!
+It took you {} guesses.",
+		word,
+		guesses
+	)
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;

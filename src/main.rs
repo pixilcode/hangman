@@ -10,9 +10,18 @@ fn main() {
 
     // Set up the game and play
     let target_word = choose_word(dictionary);
-    let game = game::HangmanGame::new(target_word);
+    let game = game::HangmanGame::new(&target_word);
     let result = game.play();
-    
+
+    match result {
+        game::GameResult::Success(guesses) => {
+            // Req 7
+            println!("{}", messages::game_success(&target_word, guesses));
+        },
+        game::GameResult::Failure {
+                ..
+            } => todo!("Let the user know they lost the game")
+    }
 }
 
 fn construct_dictionary() -> HashSet<String> {
