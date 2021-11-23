@@ -33,15 +33,19 @@ impl HangmanGame {
 
 	/// A recursive function representing the game loop
 	fn game_loop(mut self) -> GameResult {
-		if false /* todo!("Determine if all the letters have been guessed") */ {
+		if self.target_word.chars().all( // TODO: Make this more efficient
+			|c| self.correct_guesses.contains(&c)
+		) {
 			// Req 6
+			// End if all the letters were correctly guessed
 			// End condition: all the letters have been guessed
-			todo!("Return a success result with the number of guesses")
+			GameResult::Success(self.correct_guesses.len() + self.incorrect_guesses.len())
 		} else if "a" == "b" /* todo!("Determine if the player has guessed incorrectly too many times") */ {
 			// End condition: the player has incorrectly guessed too many times
 			todo!("Return a failure result with the number of incorrect guesses")
 		} else {
 			// Req 3
+			// Req 4a
 			// Display the word with correctly guessed chars filled in
 			println!("{} ({} letters)", self.show_word(), self.target_word.len());
 
@@ -58,6 +62,7 @@ impl HangmanGame {
 			let user_char = user_input.trim().parse::<char>();
 			match user_char {
 				Ok(c) => {
+					// Req 4b
 					// Let the user know if they guessed correctly
 					if self.target_word.contains(c) {
 						println!("{}", messages::correct_guess(c));
@@ -67,6 +72,7 @@ impl HangmanGame {
 						self.incorrect_guesses.insert(c);
 					}
 
+					// Req 4b
 					// Req 5
 					// Display the total number of guesses as well
 					// as the number of correct and incorrect guesses
@@ -103,7 +109,7 @@ impl HangmanGame {
 
 /// An enum that represents the result of playing a game
 pub enum GameResult {
-	Success(u32),
+	Success(usize),
 	Failure {
 		target_word: String,
 		unguessed_chars: HashSet<char>,

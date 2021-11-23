@@ -32,6 +32,7 @@ Total guesses: {} (correct: {}, incorrect: {})",
 
 /// Print out a hashset in the form of `"a, b, ..., e"`
 fn hash_set_to_string(set: &HashSet<char>) -> String {
+	// TODO: Make this more efficient
 	let mut chars = set.iter().collect::<Vec<_>>(); // Turn it into a vetor to be sorted
 	chars.sort();
 	chars.iter().enumerate().map( // Enumerate it
