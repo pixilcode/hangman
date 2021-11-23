@@ -6,7 +6,8 @@ mod messages;
 /// A struct representation of the "Hangman" game
 pub struct HangmanGame {
 	target_word: String,
-	user_guesses: HashSet<char>,
+	correct_guesses: HashSet<char>,
+	incorrect_guesses: HashSet<char>,
 }
 
 impl HangmanGame {
@@ -14,7 +15,8 @@ impl HangmanGame {
 	pub fn new(target_word: String) -> Self {
 		Self {
 			target_word,
-			user_guesses: HashSet::new(),
+			correct_guesses: HashSet::new(),
+			incorrect_guesses: HashSet::new(),
 		}
 	}
 
@@ -52,10 +54,12 @@ impl HangmanGame {
 			let mut user_input = String::new();
 			io::stdin().read_line(&mut user_input).expect("stdin not available");
 
-			// Convert the input from String to char
+			// Convert the input from String to char or report error
 			let user_char = user_input.trim().parse::<char>();
 			match user_char {
-				Ok(c) => todo!("Deal with user character"),
+				Ok(c) => {
+					todo!("Handle user char")
+				},
 				Err(_) => {
 					println!("{}", messages::INVALID_INPUT);
 					println!();
@@ -69,7 +73,7 @@ impl HangmanGame {
 	/// Shows the target_word with unguessed chars replaced with a `_`
 	fn show_word(&self) -> String {
 		self.target_word.chars().map(
-			|c| if self.user_guesses.contains(&c) {
+			|c| if self.correct_guesses.contains(&c) {
 				c
 			} else {
 				'_'
