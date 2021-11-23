@@ -32,7 +32,7 @@ impl HangmanGame {
 	}
 
 	/// A recursive function representing the game loop
-	fn game_loop(self) -> GameResult {
+	fn game_loop(mut self) -> GameResult {
 		if false /* todo!("Determine if all the letters have been guessed") */ {
 			// Req 6
 			// End condition: all the letters have been guessed
@@ -58,7 +58,26 @@ impl HangmanGame {
 			let user_char = user_input.trim().parse::<char>();
 			match user_char {
 				Ok(c) => {
-					todo!("Handle user char")
+					// Let the user know if they guessed correctly
+					if self.target_word.contains(c) {
+						println!("{}", messages::correct_guess(c));
+						self.correct_guesses.insert(c);
+					} else {
+						println!("{}", messages::incorrect_guess(c));
+						self.incorrect_guesses.insert(c);
+					}
+
+					// Req 5
+					// Display the total number of guesses as well
+					// as the number of correct and incorrect guesses
+					println!("{}",
+						messages::display_guesses(
+							&self.correct_guesses,
+							&self.incorrect_guesses
+						)
+					);
+
+					self.game_loop()
 				},
 				Err(_) => {
 					println!("{}", messages::INVALID_INPUT);
