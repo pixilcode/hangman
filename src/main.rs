@@ -26,8 +26,8 @@ fn main() {
                 println!("{}", messages::game_success(&target_word, guesses));
             },
             game::GameResult::Failure {
-                    ..
-                } => todo!("Let the user know they lost the game")
+                unguessed_chars
+            } => println!("{}", messages::game_failure(&target_word, &unguessed_chars))
         }
 
         // Req 8b

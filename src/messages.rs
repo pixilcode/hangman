@@ -36,6 +36,26 @@ Total guesses: {} (correct: {}, incorrect: {})",
 	)
 }
 
+
+pub fn game_success(word: &str, guesses: usize) -> String {
+	format!("\
+Congratulations! You correctly guessed the word '{}'!
+It took you {} guesses.",
+	word,
+	guesses
+)
+}
+
+pub fn game_failure(word: &str, unguessed: &HashSet<char>) -> String {
+	format!("\
+Oh no, you ran out of guesses!
+The word was '{}'.
+Remaining letters: {}",
+		word,
+		hash_set_to_string(unguessed)
+	)
+}
+
 /// Print out a hashset in the form of `"a, b, ..., e"`
 fn hash_set_to_string(set: &HashSet<char>) -> String {
 	// TODO: Make this more efficient
@@ -48,15 +68,6 @@ fn hash_set_to_string(set: &HashSet<char>) -> String {
 			format!("{}, ", c) // Otherwise, add on a comma
 		}
 	).collect()
-}
-
-pub fn game_success(word: &str, guesses: usize) -> String {
-	format!("\
-Congratulations! You correctly guessed the word '{}'!
-It took you {} guesses.",
-		word,
-		guesses
-	)
 }
 
 #[cfg(test)]
