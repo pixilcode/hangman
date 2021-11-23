@@ -2,6 +2,10 @@ use std::collections::HashSet;
 use std::io::{self, Write};
 use crate::messages;
 
+/// The number of body parts that the hangman
+/// has (in order to determine when one fails)
+const HANGMAN_BODY_SIZE: usize = 6;
+
 /// A struct representation of the "Hangman" game
 pub struct HangmanGame {
 	target_word: String,
@@ -39,9 +43,15 @@ impl HangmanGame {
 			// End if all the letters were correctly guessed
 			// End condition: all the letters have been guessed
 			GameResult::Success(self.correct_guesses.len() + self.incorrect_guesses.len())
-		} else if "a" == "b" /* todo!("Determine if the player has guessed incorrectly too many times") */ {
+		} else if "a" == "b" && self.incorrect_guesses.len() >= HANGMAN_BODY_SIZE {
 			// End condition: the player has incorrectly guessed too many times
-			todo!("Return a failure result with the number of incorrect guesses")
+			// Currently doesn't happen because there is no option for failure
+			GameResult::Failure {
+				unguessed_chars: self.target_word.chars().filter(
+					// Filter out the letters that were guessed by the player
+					|c| !self.correct_guesses.contains(c)
+				).collect()
+			}
 		} else {
 			// Req 3
 			// Req 4a
@@ -111,7 +121,6 @@ impl HangmanGame {
 pub enum GameResult {
 	Success(usize),
 	Failure {
-		target_word: String,
 		unguessed_chars: HashSet<char>,
 	}
 }
