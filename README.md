@@ -1,14 +1,15 @@
 # Hangman Challenge
 A recreation of the game 'Hangman' in Rust.
 
-**Time spent:** `4:00:00` (This time started when I read the problem
-and ended with the commit
+**Time spent:** `4:00:00`
+
+(This time started when I read the problem and ended with the commit
 [Final product](https://github.com/pixilcode/hangman/commit/43f1922dd56610ffe175ca2e00655fa67b6cbd1c))
 
 Though the code itself was left unchanged after the final commit,
 other files were added to prepare for the submission, including:
-  * `[assets/notes.jpg]()`
-  * `[README.md]()`
+  * [`assets/notes.jpg](assets/notes.jpg)`
+  * [`README.md`](README.md)
   * [Linux and Windows binaries](https://github.com/pixilcode/php-course/releases/tag/submission)
 
 In the case that the above links don't work, the binaries can be
@@ -49,9 +50,9 @@ In future versions, the `-f` option will also print out an
 image representing the man in the gallows.
 
 ## Future Work
-[ ] Create function for getting user input
-[ ] Create interface for standardizing output
-[ ] Add visual dividers to make output easier to read
-    *or* clear the screen at the beginning of the game loop
-[ ] For the `-f` option, print out the gallows so that the
-    can get a visual of their progression.
+- [ ] Create function for getting user input
+- [ ] Create interface for standardizing output
+- [ ] Add visual dividers to make output easier to read
+      *or* clear the screen at the beginning of the game loop
+- [ ] For the `-f` option, print out the gallows so that the
+      can get a visual of their progression.
