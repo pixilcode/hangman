@@ -10,7 +10,7 @@ Though the code itself was left unchanged after the final commit,
 other files were added to prepare for the submission, including:
   * [`assets/notes.jpg`](assets/notes.jpg)
   * [`README.md`](README.md)
-  * [Linux and Windows binaries](https://github.com/pixilcode/php-course/releases/tag/submission)
+  * [Linux and Windows binaries](https://github.com/pixilcode/hangman/releases/tag/submission)
 
 In the case that the above links don't work, the binaries can be
 found in the `submission` release.
