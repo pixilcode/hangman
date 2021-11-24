@@ -8,7 +8,7 @@ A recreation of the game 'Hangman' in Rust.
 
 Though the code itself was left unchanged after the final commit,
 other files were added to prepare for the submission, including:
-  * [`assets/notes.jpg](assets/notes.jpg)`
+  * [`assets/notes.jpg`](assets/notes.jpg)
   * [`README.md`](README.md)
   * [Linux and Windows binaries](https://github.com/pixilcode/php-course/releases/tag/submission)
 
@@ -55,4 +55,4 @@ image representing the man in the gallows.
 - [ ] Add visual dividers to make output easier to read
       *or* clear the screen at the beginning of the game loop
 - [ ] For the `-f` option, print out the gallows so that the
-      can get a visual of their progression.
+      user can get a visual of their progression.
