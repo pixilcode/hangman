@@ -9,7 +9,10 @@ Though the code itself was left unchanged after the final commit,
 other files were added to prepare for the submission, including:
   * `[assets/notes.jpg]()`
   * `[README.md]()`
-  * [Linux and Windows binaries](#)
+  * [Linux and Windows binaries](https://github.com/pixilcode/php-course/releases/tag/submission)
+
+In the case that the above links don't work, the binaries can be
+found in the `submission` release.
 
 ## The `-f` option (possible failure)
 In accordance with requirement 6, the program continues to ask the
